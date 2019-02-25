@@ -143,49 +143,47 @@ const fibonacciSeq = num => {
 //input: String of word or phrase
 //output: array of strings of all the anagrams (EAST => ASTE, TSAE, etc.)
 
-const anagrams = (string, prefix = '') => {
-  //base case
-  if (string.length <= 1)
-    return string;
-  else {
-    const stringArr = string.split('');
-    const arr = [];
-    stringArr.forEach((letter, index) => {
-      arr.push(prefix);
-      anagrams(stringArr.splice(index, 1), prefix);
-    });
-    return arr;
-  }
-};
-
-// console.log(anagrams('fart'));
-
-const anagrams2 = (string) => {
+const anagrams = (string) => {
   let results = [];
-  if(string.length <= 1)
-    return results.push(string);
+  if (string.length <= 1)
+    return [string];
   else {
     const stringArray = string.split('');
     stringArray.forEach((letter, index) => {
-      let arrayCharactersLeft = [...stringArray.slice(0, index), ...stringArray.slice(index + 1)];
-      console.log(`arrayCharactersLeft is ${arrayCharactersLeft}`);
-      console.log(`letter is ${letter}`);
-      results.push(letter + anagrams2(arrayCharactersLeft.join('')));
-    })
+      let charLeft = [...stringArray.slice(0, index), ...stringArray.slice(index + 1)].join('');
+      const innerPermuations = anagrams(charLeft);
+      innerPermuations.forEach(permutation => {
+        results.push(letter + permutation);
+      });
+    });
   }
   return results;
-}
+};
 
-console.log(anagrams2('abcd'));
+// console.log(anagrams('abcd'));
+// console.log(anagrams('car'));
 
-// function getAllPermutations (string)
-//   define results
-//   if string is a single character
-//     add the character to results
-//     return results
-//   for each char in string
-//     define innerPermutations as a char of string
-//     set innerPermutations to getAllPermutations (without next char)
-//     foreach string in innerPermutations
-//       add defined char and innerPermutations char
-//   return results
+//Animal Hierarchy
+// Input to the progam: Array of objects and a parent.
+// Input to each recursive call: Same array of objects and the id of the filtered item.
+// Output of each recursive call: An object with keys matching the child ids. Each key has a value of the node below it.
+// Output of the program: Nested object with children under their parents.
+
+// const animalHierarchy = [
+//   { id: 'Animals', parent: null },
+//   { id: 'Mammals', parent: 'Animals' },
+//   { id: 'Dogs', parent: 'Mammals' },
+//   { id: 'Cats', parent: 'Mammals' },
+//   { id: 'Golden Retriever', parent: 'Dogs' },
+//   { id: 'Husky', parent: 'Dogs' },
+//   { id: 'Bengal', parent: 'Cats' }
+// ];
+
+// // ==============================
+// function traverse(animalHierarchy, parent) {
+//   let node = {};
+//   animalHierarchy.filter(item => item.parent === parent)
+//     .forEach(item => node[item.id] = traverse(animalHierarchy, item.id));
+//   return node;
+// }
+// console.log(traverse(animalHierarchy, null));
