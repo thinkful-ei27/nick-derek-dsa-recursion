@@ -44,8 +44,30 @@ const nthTriangularNumber = num => {
 
 const stringSplitter = (string, separator) => {
   const arr = [];
-  for (let i = 0; i < string.length; i++) {
-
+  let tempString = ''
+  for (let i = 0; i <= string.length; i++) {
+    if(string[i] === separator || i === string.length){
+      arr.push(tempString);
+      tempString = '';
+    } else {
+      tempString = tempString + string[i];
+    }
   }
   return arr;
 };
+
+// console.log(stringSplitter('I WANNA DANCE', ' '));
+
+//binary representation...
+
+//outputting a string
+const binaryNumber = num => {
+  let string = '';
+  for(let i = num; i > 0; i = Math.floor(i/2)){
+    string = String((Math.floor(i % 2))) + string
+  };
+  return string;
+}
+
+console.log(binaryNumber(10));
+console.log(binaryNumber(25));
