@@ -85,8 +85,8 @@ const stringSplitter = (string, separator) => {
 
 const toBinary = (num) => {
   //base case
-  if(num === 0)
-    return "";
+  if (num === 0)
+    return '';
   else {
     const binary = String(Math.floor(num % 2));
     return toBinary(Math.floor(num / 2)) + binary;
@@ -125,16 +125,16 @@ const fibonacci = num => {
 };
 
 const fibonacciSeq = num => {
-  if(num < 0){
+  if (num < 0) {
     return 'Number should be greater than or equal to zero';
   } else if (num === 0) {
-    return "0";
-  } else if (num === 1){
-    return "1";
+    return '0';
+  } else if (num === 1) {
+    return '1';
   } else {
-  return  fibonacciSeq(num - 1) + " " + String(fibonacci(num));
+    return fibonacciSeq(num - 1) + ' ' + String(fibonacci(num));
   }
-}
+};
 
 // console.log(fibonacciSeq(100))
 
@@ -143,14 +143,19 @@ const fibonacciSeq = num => {
 //input: String of word or phrase
 //output: array of strings of all the anagrams (EAST => ASTE, TSAE, etc.)
 
-const anagrams = string => {
-    //base case
-    if(string.length <= 1)
-      return string;
-    else {
-      const aString = string.split('');
-      aString.forEach(letter, index => {
-        
-      })
-    }
-}
+const anagrams = (string, prefix = '') => {
+  //base case
+  if (string.length <= 1)
+    return string;
+  else {
+    const stringArr = string.split('');
+    const arr = [];
+    stringArr.forEach((letter, index) => {
+      arr.push(prefix);
+      anagrams(stringArr.splice(index, 1), prefix);
+    });
+    return arr;
+  }
+};
+
+console.log(anagrams('fart'));
