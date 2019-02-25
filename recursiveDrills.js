@@ -196,54 +196,53 @@ const anagrams = (string) => {
 //recursive finding all the children of the parent, and then finding the children of the children
 
 const facebookHeirarchy = [
-  {name: 'Zuckerbug', boss: null},
-  {name: 'Schroepfer', boss: 'Zuckerbug'},
-  {name: 'Schrage', boss: 'Zuckerbug'},
-  {name: 'Sandberg', boss: 'Zuckerbug'},
-  {name: 'Bosworth', boss: 'Schroepfer'},
-  {name: 'Zhao', boss: 'Schroepfer'},
-  {name: 'Steve', boss: 'Bosworth'},
-  {name: 'Kyle', boss: 'Bosworth'},
-  {name: 'Andra', boss: 'Bosworth'},
-  {name: 'Richie', boss: 'Zhao'},
-  {name: 'Sofia', boss: 'Zhao'},
-  {name: 'Jen', boss: 'Zhao'},
-  {name: 'VanDyck', boss: 'Schrage'},
-  {name: 'Sabrina', boss: 'VanDyck'},
-  {name: 'Michelle', boss: 'VanDyck'},
-  {name: 'Josh', boss: 'VanDyck'},
-  {name: 'Swain', boss: 'Schrage'},
-  {name: 'Blanch', boss: 'Swain'},
-  {name: 'Tom', boss: 'Swain'},
-  {name: 'Joe', boss: 'Swain'},
-  {name: 'Goler', boss: 'Sandberg'},
-  {name: 'Eddie', boss: 'Goler'},
-  {name: 'Julie', boss: 'Goler'},
-  {name: 'Annie', boss: 'Goler'},
-  {name: 'Hernandez', boss: 'Sandberg'},
-  {name: 'Rowi', boss: 'Hernandez'},
-  {name: 'Inga', boss: 'Hernandez'},
-  {name: 'Morgan', boss: 'Hernandez'},
-  {name: 'Moissinac', boss: 'Sandberg'},
-  {name: 'Amy', boss: 'Moissinac'},
-  {name: 'Chuck', boss: 'Moissinac'},
-  {name: 'Vinni', boss: 'Moissinac'},
-  {name: 'Kelley', boss: 'Sandberg'},
-  {name: 'Eric', boss: 'Kelley'},
-  {name: 'Ana', boss: 'Kelley'},
-  {name: 'Wes', boss: 'Kelley'}
-]
+  { name: 'Zuckerbug', boss: null },
+  { name: 'Schroepfer', boss: 'Zuckerbug' },
+  { name: 'Schrage', boss: 'Zuckerbug' },
+  { name: 'Sandberg', boss: 'Zuckerbug' },
+  { name: 'Bosworth', boss: 'Schroepfer' },
+  { name: 'Zhao', boss: 'Schroepfer' },
+  { name: 'Steve', boss: 'Bosworth' },
+  { name: 'Kyle', boss: 'Bosworth' },
+  { name: 'Andra', boss: 'Bosworth' },
+  { name: 'Richie', boss: 'Zhao' },
+  { name: 'Sofia', boss: 'Zhao' },
+  { name: 'Jen', boss: 'Zhao' },
+  { name: 'VanDyck', boss: 'Schrage' },
+  { name: 'Sabrina', boss: 'VanDyck' },
+  { name: 'Michelle', boss: 'VanDyck' },
+  { name: 'Josh', boss: 'VanDyck' },
+  { name: 'Swain', boss: 'Schrage' },
+  { name: 'Blanch', boss: 'Swain' },
+  { name: 'Tom', boss: 'Swain' },
+  { name: 'Joe', boss: 'Swain' },
+  { name: 'Goler', boss: 'Sandberg' },
+  { name: 'Eddie', boss: 'Goler' },
+  { name: 'Julie', boss: 'Goler' },
+  { name: 'Annie', boss: 'Goler' },
+  { name: 'Hernandez', boss: 'Sandberg' },
+  { name: 'Rowi', boss: 'Hernandez' },
+  { name: 'Inga', boss: 'Hernandez' },
+  { name: 'Morgan', boss: 'Hernandez' },
+  { name: 'Moissinac', boss: 'Sandberg' },
+  { name: 'Amy', boss: 'Moissinac' },
+  { name: 'Chuck', boss: 'Moissinac' },
+  { name: 'Vinni', boss: 'Moissinac' },
+  { name: 'Kelley', boss: 'Sandberg' },
+  { name: 'Eric', boss: 'Kelley' },
+  { name: 'Ana', boss: 'Kelley' },
+  { name: 'Wes', boss: 'Kelley' }
+];
 
 // \n is line break
 
-const organizationChart = (array, boss) => {
-    let string = ``;
-    array.filter(person => person.boss === boss)
-      .forEach(person => {
-        string = `${string} ${person.name} ${organizationChart(array, person.name)}`; 
-        // = organizationChart(array, person.name)
-      })
-    return string;
-}
+const organizationChart = (array, boss, level = 0) => {
+  let string = '';
+  array.filter(person => person.boss === boss)
+    .forEach(person => {
+      string = string + '\n' + ' '.repeat(level * 4) + person.name + organizationChart(array, person.name, level + 1);
+    });
+  return string;
+};
 
 console.log(organizationChart(facebookHeirarchy, null));
