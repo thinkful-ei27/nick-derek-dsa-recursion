@@ -79,7 +79,24 @@ const stringSplitter = (string, separator) => {
 // console.log(stringSplitter('This is a sample string', 'i'));
 
 // Binary Representation
-// Will be done in workshop
+
+//input will be a decimal
+//output will be a binary string
+
+const toBinary = (num) => {
+  //base case
+  if(num === 0)
+    return "";
+  else {
+    const binary = String(Math.floor(num % 2));
+    return toBinary(Math.floor(num / 2)) + binary;
+  }
+  //recursive case
+}
+
+// console.log(toBinary(10));
+// console.log(toBinary(3));
+// console.log(toBinary(25));
 
 // Factorial
 const factorial = num => {
@@ -107,4 +124,33 @@ const fibonacci = num => {
   }
 };
 
-console.log(fibonacci(14));
+const fibonacciSeq = num => {
+  if(num < 0){
+    return 'Number should be greater than or equal to zero';
+  } else if (num === 0) {
+    return "0";
+  } else if (num === 1){
+    return "1";
+  } else {
+  return  fibonacciSeq(num - 1) + " " + String(fibonacci(num));
+  }
+}
+
+// console.log(fibonacciSeq(100))
+
+//anagrams
+
+//input: String of word or phrase
+//output: array of strings of all the anagrams (EAST => ASTE, TSAE, etc.)
+
+const anagrams = string => {
+    //base case
+    if(string.length <= 1)
+      return string;
+    else {
+      const aString = string.split('');
+      aString.forEach(letter, index => {
+        
+      })
+    }
+}
