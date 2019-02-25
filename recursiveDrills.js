@@ -158,4 +158,34 @@ const anagrams = (string, prefix = '') => {
   }
 };
 
-console.log(anagrams('fart'));
+// console.log(anagrams('fart'));
+
+const anagrams2 = (string) => {
+  let results = [];
+  if(string.length <= 1)
+    return results.push(string);
+  else {
+    const stringArray = string.split('');
+    stringArray.forEach((letter, index) => {
+      let arrayCharactersLeft = [...stringArray.slice(0, index), ...stringArray.slice(index + 1)];
+      console.log(`arrayCharactersLeft is ${arrayCharactersLeft}`);
+      console.log(`letter is ${letter}`);
+      results.push(letter + anagrams2(arrayCharactersLeft.join('')));
+    })
+  }
+  return results;
+}
+
+console.log(anagrams2('abcd'));
+
+// function getAllPermutations (string)
+//   define results
+//   if string is a single character
+//     add the character to results
+//     return results
+//   for each char in string
+//     define innerPermutations as a char of string
+//     set innerPermutations to getAllPermutations (without next char)
+//     foreach string in innerPermutations
+//       add defined char and innerPermutations char
+//   return results
